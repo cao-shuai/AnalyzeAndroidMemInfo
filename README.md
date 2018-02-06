@@ -11,7 +11,7 @@
 2. 使用说明:
    a) 把memdebug.sh copy 到/data/目录下：然后切换到/data工作目录下执行
    sh memdebug.sh > /mnt/usb/sda1/meminfo.log & 
-
+   	  说明： /mnt/usb/sda1/为你自己的U盘目录
    b) 抓到的对应的meminfo.log信息，使用python parsemem.py meminfo.log 即可在同一级目录result/目录下生成对应的png图片
 
 
