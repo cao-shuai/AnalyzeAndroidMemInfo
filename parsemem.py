@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import re
 import sys
+import os
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter  
 
 
@@ -57,6 +58,9 @@ class MemPareseClass(object):
 		self.Native=[];
 
 		self.filename=path;
+
+		if os.path.exists("reslut/") is False:
+			os.makedirs("reslut/")
 
 	def ParseFile(self):
 		file=open(self.filename);
