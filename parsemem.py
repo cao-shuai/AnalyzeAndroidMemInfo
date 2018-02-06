@@ -59,8 +59,9 @@ class MemPareseClass(object):
 
 		self.filename=path;
 
-		if os.path.exists("reslut/") is False:
-			os.makedirs("reslut/")
+		self.targetName="result/"
+		if os.path.exists(self.targetName) is False:
+			os.makedirs(self.targetName)
 
 	def ParseFile(self):
 		file=open(self.filename);
@@ -205,7 +206,7 @@ class MemPareseClass(object):
 		self.plt.title("MemFree");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/MemFree.png")
+		self.plt.savefig(self.targetName+"MemFree.png")
 
 	def __DrawMemInfoBuffersRAM__(self,ind):
 		x=[];
@@ -216,7 +217,7 @@ class MemPareseClass(object):
 		self.plt.title("Buffers");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Buffers.png");
+		self.plt.savefig(self.targetName+"Buffers.png");
 
 	def __DrawMemInfoCachedRAM__(self,ind):
 		x=[];
@@ -227,7 +228,7 @@ class MemPareseClass(object):
 		self.plt.title("Cached");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Cached.png");
+		self.plt.savefig(self.targetName+"Cached.png");
 
 	def __DrawMemInfoSwapCachedRAM__(self,ind):
 		x=[];
@@ -238,7 +239,7 @@ class MemPareseClass(object):
 		self.plt.title("SwapCached");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/SwapCached.png");
+		self.plt.savefig(self.targetName+"SwapCached.png");
 
 	def __DrawMemInfoActiveRAM__(self,ind):
 		x=[];
@@ -249,7 +250,7 @@ class MemPareseClass(object):
 		self.plt.title("Active");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Active.png");
+		self.plt.savefig(self.targetName+"Active.png");
 
 	def __DrawMemInfoInactiveRAM__(self,ind):
 		x=[];
@@ -260,7 +261,7 @@ class MemPareseClass(object):
 		self.plt.title("Inactive");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Inactive.png");
+		self.plt.savefig(self.targetName+"Inactive.png");
 
 	def __DrawMemInfoActive_anonRAM__(self,ind):
 		x=[];
@@ -271,7 +272,7 @@ class MemPareseClass(object):
 		self.plt.title("Active(anon)");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Active_anon.png");
+		self.plt.savefig(self.targetName+"Active_anon.png");
 
 	def __DrawMemInfoInactive_anonRAM__(self,ind):
 		x=[];
@@ -282,7 +283,7 @@ class MemPareseClass(object):
 		self.plt.title("Inactive(anon)");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Inactive_anon.png");
+		self.plt.savefig(self.targetName+"Inactive_anon.png");
 
 	def __DrawMemInfoActive_fileRAM__(self,ind):
 		x=[];
@@ -293,7 +294,7 @@ class MemPareseClass(object):
 		self.plt.title("Active(file)");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Active_file.png");
+		self.plt.savefig(self.targetName+"Active_file.png");
 
 	def __DrawMemInfoInactive_fileRAM__(self,ind):
 		x=[];
@@ -304,7 +305,7 @@ class MemPareseClass(object):
 		self.plt.title("Inactive(file)");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Inactive_file.png");
+		self.plt.savefig(self.targetName+"Inactive_file.png");
 
 	def __DrawMemInfoUnevictableRAM__(self,ind):
 		x=[];
@@ -315,7 +316,7 @@ class MemPareseClass(object):
 		self.plt.title("Unevictable");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Unevictable.png");
+		self.plt.savefig(self.targetName+"Unevictable.png");
 
 	def __DrawMemInfoMlockedRAM__(self,ind):
 		x=[];
@@ -326,7 +327,7 @@ class MemPareseClass(object):
 		self.plt.title("Mlocked");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Mlocked.png");
+		self.plt.savefig(self.targetName+"Mlocked.png");
 
 	def __DrawMemInfoHighTotalRAM__(self,ind):
 		x=[];
@@ -337,7 +338,7 @@ class MemPareseClass(object):
 		self.plt.title("HighTotal");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/HighTotal.png");
+		self.plt.savefig(self.targetName+"HighTotal.png");
 
 	def __DrawMemInfoHighFreeRAM__(self,ind):
 		x=[];
@@ -348,7 +349,7 @@ class MemPareseClass(object):
 		self.plt.title("HighFree");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/HighFree.png");
+		self.plt.savefig(self.targetName+"HighFree.png");
 
 	def __DrawMemInfoLowTotalRAM__(self,ind):
 		x=[];
@@ -359,7 +360,7 @@ class MemPareseClass(object):
 		self.plt.title("LowTotal");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/LowTotal.png");
+		self.plt.savefig(self.targetName+"LowTotal.png");
 
 	def __DrawMemInfoLowFreeRAM__(self,ind):
 		x=[];
@@ -370,7 +371,7 @@ class MemPareseClass(object):
 		self.plt.title("LowFree");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/LowFree.png");
+		self.plt.savefig(self.targetName+"LowFree.png");
 
 	def __DrawMemInfoSwapTotalRAM__(self,ind):
 		x=[];
@@ -381,7 +382,7 @@ class MemPareseClass(object):
 		self.plt.title("SwapTotal");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/SwapTotal.png");
+		self.plt.savefig(self.targetName+"SwapTotal.png");
 
 	def __DrawMemInfoSwapFreeRAM__(self,ind):
 		x=[];
@@ -392,7 +393,7 @@ class MemPareseClass(object):
 		self.plt.title("SwapFree");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/SwapFree.png");
+		self.plt.savefig(self.targetName+"SwapFree.png");
 
 	def __DrawMemInfoDirtyRAM__(self,ind):
 		x=[];
@@ -403,7 +404,7 @@ class MemPareseClass(object):
 		self.plt.title("Dirty");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Dirty.png");
+		self.plt.savefig(self.targetName+"Dirty.png");
 
 	def __DrawMemInfoWritebackRAM__(self,ind):
 		x=[];
@@ -414,7 +415,7 @@ class MemPareseClass(object):
 		self.plt.title("Writeback");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Writeback.png");
+		self.plt.savefig(self.targetName+"Writeback.png");
 
 	def __DrawMemInfoAnonPagesRAM__(self,ind):
 		x=[];
@@ -425,7 +426,7 @@ class MemPareseClass(object):
 		self.plt.title("AnonPages");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/AnonPages.png");
+		self.plt.savefig(self.targetName+"AnonPages.png");
 
 	def __DrawMemInfoMappedRAM__(self,ind):
 		x=[];
@@ -436,7 +437,7 @@ class MemPareseClass(object):
 		self.plt.title("Mapped");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Mapped.png");
+		self.plt.savefig(self.targetName+"Mapped.png");
 
 	def __DrawMemInfoShmemRAM__(self,ind):
 		x=[];
@@ -447,7 +448,7 @@ class MemPareseClass(object):
 		self.plt.title("Shmem");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Shmem.png");
+		self.plt.savefig(self.targetName+"Shmem.png");
 
 	def __DrawMemInfoSlabRAM__(self,ind):
 		x=[];
@@ -458,7 +459,7 @@ class MemPareseClass(object):
 		self.plt.title("Slab");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Slab.png");
+		self.plt.savefig(self.targetName+"Slab.png");
 
 	def __DrawMemInfoSReclaimableRAM__(self,ind):
 		x=[];
@@ -469,7 +470,7 @@ class MemPareseClass(object):
 		self.plt.title("SReclaimable");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/SReclaimable.png");
+		self.plt.savefig(self.targetName+"SReclaimable.png");
 
 	def __DrawMemInfoSUnreclaimRAM__(self,ind):
 		x=[];
@@ -480,7 +481,7 @@ class MemPareseClass(object):
 		self.plt.title("SUnreclaim");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/SUnreclaim.png");
+		self.plt.savefig(self.targetName+"SUnreclaim.png");
 
 	def __DrawMemInfoKernelStackRAM__(self,ind):
 		x=[];
@@ -491,7 +492,7 @@ class MemPareseClass(object):
 		self.plt.title("KernelStack");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/KernelStack.png");
+		self.plt.savefig(self.targetName+"KernelStack.png");
 
 	def __DrawMemInfoPageTablesRAM__(self,ind):
 		x=[];
@@ -502,7 +503,7 @@ class MemPareseClass(object):
 		self.plt.title("PageTables");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/PageTables.png");
+		self.plt.savefig(self.targetName+"PageTables.png");
 
 	def __DrawMemInfoNFS_UnstableRAM__(self,ind):
 		x=[];
@@ -513,7 +514,7 @@ class MemPareseClass(object):
 		self.plt.title("NFS_Unstable");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/NFS_Unstable.png");
+		self.plt.savefig(self.targetName+"NFS_Unstable.png");
 
 	def __DrawMemInfoBounceRAM__(self,ind):
 		x=[];
@@ -524,7 +525,7 @@ class MemPareseClass(object):
 		self.plt.title("Bounce");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Bounce.png");
+		self.plt.savefig(self.targetName+"Bounce.png");
 
 	def __DrawMemInfoWritebackTmpRAM__(self,ind):
 		x=[];
@@ -535,7 +536,7 @@ class MemPareseClass(object):
 		self.plt.title("WritebackTmp");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/WritebackTmp.png");
+		self.plt.savefig(self.targetName+"WritebackTmp.png");
 
 	def __DrawMemInfoCommitLimitRAM__(self,ind):
 		x=[];
@@ -546,7 +547,7 @@ class MemPareseClass(object):
 		self.plt.title("CommitLimit");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/CommitLimit.png");
+		self.plt.savefig(self.targetName+"CommitLimit.png");
 
 	def __DrawMemInfoCommitted_ASRAM__(self,ind):
 		x=[];
@@ -557,7 +558,7 @@ class MemPareseClass(object):
 		self.plt.title("Committed_AS");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Committed_AS.png");
+		self.plt.savefig(self.targetName+"Committed_AS.png");
 
 	def __DrawMemInfoVmallocTotalRAM__(self,ind):
 		x=[];
@@ -568,7 +569,7 @@ class MemPareseClass(object):
 		self.plt.title("VmallocTotal");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/VmallocTotal.png");
+		self.plt.savefig(self.targetName+"VmallocTotal.png");
 
 	def __DrawMemInfoVmallocUsedRAM__(self,ind):
 		x=[];
@@ -579,7 +580,7 @@ class MemPareseClass(object):
 		self.plt.title("VmallocUsed");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/VmallocUsed.png");
+		self.plt.savefig(self.targetName+"VmallocUsed.png");
 
 	def __DrawMemInfoVmallocChunkRAM__(self,ind):
 		x=[];
@@ -590,7 +591,7 @@ class MemPareseClass(object):
 		self.plt.title("VmallocChunk");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/VmallocChunk.png");
+		self.plt.savefig(self.targetName+"VmallocChunk.png");
 
 	def __DrawMemInfoCMAFreeRAM__(self,ind):
 		x=[];
@@ -601,7 +602,7 @@ class MemPareseClass(object):
 		self.plt.title("CMA Free");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/CMA_Free.png");
+		self.plt.savefig(self.targetName+"CMA_Free.png");
 
 	def __DrawFreeRAM__(self,ind):
 		x=[];
@@ -612,7 +613,7 @@ class MemPareseClass(object):
 		self.plt.title("Free RAM");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Free_RAM.png");
+		self.plt.savefig(self.targetName+"Free_RAM.png");
 
 	def __DrawUsedRAM__(self,ind):
 		x=[];
@@ -623,7 +624,7 @@ class MemPareseClass(object):
 		self.plt.title("UsedRAM");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/UsedRAM.png");
+		self.plt.savefig(self.targetName+"UsedRAM.png");
 
 	def __DrawLostRAM__(self,ind):
 		x=[];
@@ -634,7 +635,7 @@ class MemPareseClass(object):
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
 		self.plt.title("LostRAM");
-		self.plt.savefig("reslut/LostRAM.png");
+		self.plt.savefig(self.targetName+"LostRAM.png");
 
 	def __MaliMemUsage__(self,ind):
 		x=[];
@@ -645,7 +646,7 @@ class MemPareseClass(object):
 		self.plt.title("Mali mem usage");
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
-		self.plt.savefig("reslut/Mali-mem-usage.png");
+		self.plt.savefig(self.targetName+"Mali-mem-usage.png");
 
 if __name__=="__main__":
 	mempaser=MemPareseClass(sys.argv[1]);
