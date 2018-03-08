@@ -9,9 +9,8 @@
    c) python 插件： matplotlib：配置方法见： https://matplotlib.org/ 
 
 2. 使用说明:
-   a) 把memdebug.sh copy 到/data/目录下：然后切换到/data工作目录下执行
-   sh memdebug.sh > /mnt/usb/sda1/meminfo.log & 
+   a) 把systembug.sh copy 到/data/目录下：然后切换到/data工作目录下执行
+   b) 首先查看systemdebug 的命令使用方法：sh systemdebug.sh help; 可以看到目前支持sh systemdebug.sh cpu > /mnt/usb/sda1/cpu.log & 或者sh systemdebug.sh mem > /mnt/usb/sda1/mem.log &
    	  说明： /mnt/usb/sda1/为你自己的U盘目录
-   b) 抓到的对应的meminfo.log信息，使用python parsemem.py meminfo.log 即可在同一级目录result/目录下生成对应的png图片
-
-
+   c) 可以使用python main.py --help 查看帮助
+   	 抓到的对应的filename.log信息，使用python main.py cpu/mem filename.log 即可在同一级目录result/CPUAnalyze/目录下生成对应的cpu png图片 或者 result/MemAnalyze/目录下生成对应的mem png图片
