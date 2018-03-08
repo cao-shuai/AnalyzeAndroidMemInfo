@@ -33,22 +33,15 @@ class CPUParseClass(object):
 				index=index+1;
 				count=0;
 				Userline=re.findall(r"User \d+%",line)[0];
-				#print "User: "+re.findall(r"\d+",Userline)[0];
 				count=count+int(re.findall(r"\d+",Userline)[0]);
 				self.UserCPU.append(int(re.findall(r"\d+",Userline)[0]));
-
 				Systemline=re.findall(r"System \d+%",line)[0];
-				#print "system: "+re.findall(r"\d+",Systemline)[0];
 				count=count+int(re.findall(r"\d+",Systemline)[0]);
 				self.SystemCPU.append(int(re.findall(r"\d+",Systemline)[0]))
-				
 				IOWline=re.findall(r"IOW \d+%",line)[0];
-				#print "IOW: "+re.findall(r"\d+",IOWline)[0];
 				count=count+int(re.findall(r"\d+",IOWline)[0]);
 				self.IOWCPU.append(int(re.findall(r"\d+",IOWline)[0]))
-				
 				IRQline=re.findall(r"IRQ \d+%",line)[0];
-				#print "IRQ: "+re.findall(r"\d+",IRQline)[0];
 				count=count+int(re.findall(r"\d+",IRQline)[0]);
 				self.IRQCPU.append(int(re.findall(r"\d+",IRQline)[0]))
 				print "toal cpu percent is: %s%%"%(count);
@@ -120,11 +113,3 @@ class CPUParseClass(object):
 		for index in xrange(len(value)):
 			total=total+value[index];
 		return total/len(value);
-
-
-if __name__ == '__main__':
-	CPUparse=CPUParseClass(sys.argv[1]);
-	CPUparse.ParseFile();
-	CPUparse.Draw();
-			
-		

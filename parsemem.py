@@ -59,7 +59,7 @@ class MemPareseClass(object):
 
 		self.filename=path;
 
-		self.targetName="result/MemAnalyze"
+		self.targetName="result/MemAnalyze/"
 		if os.path.exists(self.targetName) is False:
 			os.makedirs(self.targetName)
 
@@ -647,8 +647,3 @@ class MemPareseClass(object):
 		self.plt.xlabel("times");
 		self.plt.ylabel("MB");
 		self.plt.savefig(self.targetName+"Mali-mem-usage.png");
-
-if __name__=="__main__":
-	mempaser=MemPareseClass(sys.argv[1]);
-	mempaser.ParseFile();
-	mempaser.Draw();
