@@ -59,7 +59,7 @@ class MemPareseClass(object):
 
 		self.filename=path;
 
-		self.targetName="result/"
+		self.targetName="result/MemAnalyze"
 		if os.path.exists(self.targetName) is False:
 			os.makedirs(self.targetName)
 
