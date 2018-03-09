@@ -5,22 +5,17 @@ import numpy as np
 import re
 import sys
 import os
-from matplotlib.ticker import MultipleLocator, FormatStrFormatter  
+from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+from baseparse import BaseParseClass
 
 
-class MemPareseClass(object):
+class MemPareseClass(BaseParseClass):
 	"""docstring for ClassName"""
 	def __init__(self, path):
-		
-		self.filename=path;
+		super(MemPareseClass,self).__init__(path);
 		self.targetName="result/MemAnalyze/"
 		if os.path.exists(self.targetName) is False:
 			os.makedirs(self.targetName)
-
-		self.plt=plt;
-		self.indexPicture=0;
-		self.picturesmarklinetyle="-"
-		self.tagDirct={};
 
 	def ParseFile(self):
 		file=open(self.filename);

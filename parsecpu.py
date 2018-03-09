@@ -6,20 +6,16 @@ import re
 import sys
 import os
 from matplotlib.ticker import MultipleLocator, FormatStrFormatter
+from baseparse import BaseParseClass
 
-class CPUParseClass(object):
+class CPUParseClass(BaseParseClass):
 	"""docstring for CPUParseClass"""
 	def __init__(self, path):
+		super(CPUParseClass,self).__init__(path);
 		
-		self.filename=path;
 		self.targetName="result/CPUAnalyze/";
 		if os.path.exists(self.targetName) is False:
 			os.makedirs(self.targetName);
-
-		self.plt=plt;
-		self.indexPicture=0;
-		self.picturesmarklinetyle="-"
-		self.tagDirct={};
 
 	def ParseFile(self):
 		file=open(self.filename)
@@ -72,28 +68,13 @@ class CPUParseClass(object):
 		namelist=[];
 		valuelist=[];
 		if "Total CPU Percent" in self.tagDirct.keys():
-			MaximumCPUPercent=self.__GetMaxVaule__(self.tagDirct["Total CPU Percent"]);
+			MaximumCPUPercent=super(CPUParseClass,self).__GetMaxVaule__(self.tagDirct["Total CPU Percent"]);
 			namelist.append('MaximumCPUPercent');
 			valuelist.append(MaximumCPUPercent);
-			AverageCPUPercent=self.__GetAverageValue__(self.tagDirct["Total CPU Percent"]);
+			AverageCPUPercent=super(CPUParseClass,self).__GetAverageValue__(self.tagDirct["Total CPU Percent"]);
 			namelist.append('AverageCPUPercent');
 			valuelist.append(AverageCPUPercent);
 			self.indexPicture=self.indexPicture+1;
 			self.plt.figure(self.indexPicture);
 			self.plt.bar(range(len(valuelist)),valuelist,color='rgb',tick_label=namelist);
 			self.plt.savefig(self.targetName+"SUMImportantInfo Percent.png");
-
-	def __GetMaxVaule__(self,value):
-		maxvalue=0;
-		for index in xrange(len(value)):
-			if value[index] > maxvalue:
-				maxvalue=value[index];
-		return maxvalue;
-
-	def __GetAverageValue__(self,value):
-		total=0;
-		if len(value) == 0:
-			return Total;
-		for index in xrange(len(value)):
-			total=total+value[index];
-		return total/len(value);
