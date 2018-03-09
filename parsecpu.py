@@ -10,96 +10,76 @@ from matplotlib.ticker import MultipleLocator, FormatStrFormatter
 class CPUParseClass(object):
 	"""docstring for CPUParseClass"""
 	def __init__(self, path):
-		self.UserCPU=[];
-		self.SystemCPU=[];
-		self.IOWCPU=[];
-		self.IRQCPU=[];
-		self.totalCPU=[];
-		self.XtotalLen=[];
-
+		
 		self.filename=path;
 		self.targetName="result/CPUAnalyze/";
 		if os.path.exists(self.targetName) is False:
 			os.makedirs(self.targetName);
 
+		self.plt=plt;
+		self.indexPicture=0;
 		self.picturesmarklinetyle="-"
+		self.tagDirct={};
 
 	def ParseFile(self):
 		file=open(self.filename)
-		index=0;
 		for line in file:
+			#define parse cpu useage info string eg: User 11%, System 15%, IOW 0%, IRQ 0%	
 			if re.findall(r"\S+\s?\d+%,\s?\S+\s?\d+%,\s?\S+\s?\d+%,",line):
-				self.XtotalLen.append(index);
-				index=index+1;
 				count=0;
-				Userline=re.findall(r"User \d+%",line)[0];
-				count=count+int(re.findall(r"\d+",Userline)[0]);
-				self.UserCPU.append(int(re.findall(r"\d+",Userline)[0]));
-				Systemline=re.findall(r"System \d+%",line)[0];
-				count=count+int(re.findall(r"\d+",Systemline)[0]);
-				self.SystemCPU.append(int(re.findall(r"\d+",Systemline)[0]))
-				IOWline=re.findall(r"IOW \d+%",line)[0];
-				count=count+int(re.findall(r"\d+",IOWline)[0]);
-				self.IOWCPU.append(int(re.findall(r"\d+",IOWline)[0]))
-				IRQline=re.findall(r"IRQ \d+%",line)[0];
-				count=count+int(re.findall(r"\d+",IRQline)[0]);
-				self.IRQCPU.append(int(re.findall(r"\d+",IRQline)[0]))
-				print "toal cpu percent is: %s%%"%(count);
-				self.totalCPU.append(count);
+				for index in xrange(len(re.findall(r"\S+\s?\d+%",line))):
+					#print re.findall(r"[a-z,A-Z]+\s?\d+%",line)[index];
+					strline=re.findall(r"[a-z,A-Z]+\s?\d+%",line)[index];
+					key=re.findall(r"[a-z,A-Z]+",strline)[0];
+					value=int(re.findall(r"\d+",strline)[0]);
+					count=count+value;
+					if key in self.tagDirct.keys():
+						#be careful value is a string ,and must be switch to int
+						self.tagDirct[key].append(value);
+					else:
+						self.tagDirct[key]=map(int,str(value));
+				if "Total CPU Percent" in self.tagDirct.keys():
+					self.tagDirct["Total CPU Percent"].append(count);
+				else:
+					self.tagDirct["Total CPU Percent"]=map(int,str(count));
+			else:
+				pass
+				#need instance
 		file.close();
 
 	def Draw(self):
-		self.plt=plt;
-		self.__DrawTotalCPU__(1);
-		self.__DrawUserCPU__(2);
-		self.__DrawSystemCPU__(3);
-		self.__DrawIRQCPU__(4);
-		self.__DrawIOWCPU__(5);
+		self.__DrawCPUPicutre__();
+		self.__DrawSUMImportantInfoPicture__();
 
-	def __DrawTotalCPU__(self,ind):
-		maxvalue=self.__GetMaxVaule__(self.totalCPU);
-		print "toal cpu letter percent is: %s%%"%(maxvalue);
-		avergevalue=self.__GetAverageValue__(self.totalCPU);
-		print "toal cpu average percent is: %s%%"%(avergevalue);
-		self.plt.figure(ind);
-		self.plt.plot(self.XtotalLen,self.totalCPU,self.picturesmarklinetyle);
-		self.plt.title("Total CPU percent");
-		self.plt.xlabel("times");
-		self.plt.ylabel("Percent");
-		self.plt.savefig(self.targetName+"Total CPU Percent.png");
+	def __DrawCPUPicutre__(self):
+		XtotalLen=[];
+		for key in self.tagDirct:
+			del XtotalLen[:];
+			self.indexPicture=self.indexPicture+1;
+			for totallen in xrange(len(self.tagDirct[key])):
+				XtotalLen.append(totallen);
+			self.plt.figure(self.indexPicture);
+			self.plt.plot(XtotalLen,self.tagDirct[key],self.picturesmarklinetyle);
+			self.plt.title(key+" CPU Percent");
+			self.plt.xlabel("Times");
+			self.plt.ylabel("Percent");
+			self.plt.savefig(self.targetName+key+" Percent.png");
 
 
-	def __DrawUserCPU__(self,ind):
-		self.plt.figure(ind);
-		self.plt.plot(self.XtotalLen,self.UserCPU,self.picturesmarklinetyle);
-		self.plt.title("User CPU percent");
-		self.plt.xlabel("times");
-		self.plt.ylabel("Percent");
-		self.plt.savefig(self.targetName+"User CPU Percent.png");
-
-	def __DrawSystemCPU__(self,ind):
-		self.plt.figure(ind);
-		self.plt.plot(self.XtotalLen,self.SystemCPU,self.picturesmarklinetyle);
-		self.plt.title("System CPU percent");
-		self.plt.xlabel("times");
-		self.plt.ylabel("Percent");
-		self.plt.savefig(self.targetName+"System CPU Percent.png");
-
-	def __DrawIOWCPU__(self,ind):
-		self.plt.figure(ind);
-		self.plt.plot(self.XtotalLen,self.IOWCPU,self.picturesmarklinetyle);
-		self.plt.title("IOW CPU percent");
-		self.plt.xlabel("times");
-		self.plt.ylabel("Percent");
-		self.plt.savefig(self.targetName+"IOW CPU Percent.png");
-
-	def __DrawIRQCPU__(self,ind):
-		self.plt.figure(ind);
-		self.plt.plot(self.XtotalLen,self.IRQCPU,self.picturesmarklinetyle);
-		self.plt.title("IRQ CPU percent");
-		self.plt.xlabel("times");
-		self.plt.ylabel("Percent");
-		self.plt.savefig(self.targetName+"IRQ CPU Percent.png");
+	def __DrawSUMImportantInfoPicture__(self):
+		namelist=[];
+		valuelist=[];
+		if "Total CPU Percent" in self.tagDirct.keys():
+			MaximumCPUPercent=self.__GetMaxVaule__(self.tagDirct["Total CPU Percent"]);
+			namelist.append('MaximumCPUPercent');
+			valuelist.append(MaximumCPUPercent);
+			AverageCPUPercent=self.__GetAverageValue__(self.tagDirct["Total CPU Percent"]);
+			namelist.append('AverageCPUPercent');
+			valuelist.append(AverageCPUPercent);
+			self.indexPicture=self.indexPicture+1;
+			self.plt.figure(self.indexPicture);
+			self.plt.bar(range(len(valuelist)),valuelist,color='rgb',tick_label=namelist);
+			self.plt.savefig(self.targetName+"SUMImportantInfo Percent.png");
 
 	def __GetMaxVaule__(self,value):
 		maxvalue=0;
@@ -110,6 +90,8 @@ class CPUParseClass(object):
 
 	def __GetAverageValue__(self,value):
 		total=0;
+		if len(value) == 0:
+			return Total;
 		for index in xrange(len(value)):
 			total=total+value[index];
 		return total/len(value);
