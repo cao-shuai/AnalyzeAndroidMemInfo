@@ -37,11 +37,13 @@ class CPUParseClass(object):
 						#be careful value is a string ,and must be switch to int
 						self.tagDirct[key].append(value);
 					else:
-						self.tagDirct[key]=map(int,str(value));
+						valuelist=[value];
+						self.tagDirct[key]=valuelist;
 				if "Total CPU Percent" in self.tagDirct.keys():
 					self.tagDirct["Total CPU Percent"].append(count);
 				else:
-					self.tagDirct["Total CPU Percent"]=map(int,str(count));
+					valuelist=[count];
+					self.tagDirct["Total CPU Percent"]=valuelist;
 			else:
 				pass
 				#need instance
