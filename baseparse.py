@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 #coding: utf-8
+import os
+import matplotlib as mpl
+if os.environ.get('DISPLAY','') == '':
+	print('no display found. Using non-interactive Agg backend')
+	mpl.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import re
@@ -16,6 +21,7 @@ class BaseParseClass(object):
 		self.picturesmarklinetyle="-"
 		self.tagDirct={};
 		self.targetName="";
+
 
 	def ParseFile(self):
 		pass
