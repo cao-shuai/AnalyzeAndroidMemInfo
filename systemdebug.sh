@@ -13,7 +13,10 @@ function GETCPUINFO(){
 	while [[ 1 ]]; do
 		#statements
 		echo "================================================================";
-		cat /proc/cpuinfo;
+		#cat /proc/cpuinfo;
+		echo "cpu hotplug open core:"
+		cat /proc/cpuinfo |grep "processor" | grep -Eo "[0-9]" | busybox wc -l
+		echo "top 10 process: "
 		top -m 10 -n 1;
 		sleep 1
 	done
