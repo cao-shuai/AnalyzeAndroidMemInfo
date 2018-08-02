@@ -13,6 +13,10 @@ if __name__ == '__main__':
 			parse=CPUParseClass(sys.argv[2]);
 		elif "MEM" in comandline or "mem" in comandline:
 			parse=MemPareseClass(sys.argv[2]);
+		else:
+			print "======================================================================================";
+			print "python main.py --help";
+			print "======================================================================================";
 		if parse is not None:
 			parse.ParseFile();
 			parse.Draw();
