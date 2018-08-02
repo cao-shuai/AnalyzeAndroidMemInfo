@@ -6,12 +6,7 @@ from parsecpu import CPUParseClass
 
 if __name__ == '__main__':
 	comadlenth=len(sys.argv);
-	if comadlenth ==2:
-		print "======================================================================================";
-		print "you can input python main.py --help"
-		print "======================================================================================";
-	
-	elif comadlenth ==3:
+	if comadlenth ==3:
 		parse=None
 		comandline=sys.argv[1];
 		if "CPU" in comandline or "cpu" in comandline :
